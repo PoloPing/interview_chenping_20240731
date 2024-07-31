@@ -1,0 +1,240 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "A demo service API in Go using Gin framework",
+        "title": "Service API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8888",
+    "basePath": "/api",
+    "paths": {
+        "/levels": {
+            "get": {
+                "description": "Return list of level.",
+                "tags": [
+                    "level"
+                ],
+                "summary": "Get All level.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Save level data in Db.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "level"
+                ],
+                "summary": "Create level",
+                "parameters": [
+                    {
+                        "description": "Create level",
+                        "name": "level",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.CreateLevelRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/player/{id}": {
+            "delete": {
+                "description": "Remove player data by id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "player"
+                ],
+                "summary": "Delete player",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/players": {
+            "get": {
+                "description": "Return list of player.",
+                "tags": [
+                    "player"
+                ],
+                "summary": "Get All players.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Save player data in Db.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "player"
+                ],
+                "summary": "Create player",
+                "parameters": [
+                    {
+                        "description": "Create player",
+                        "name": "player",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.CreatePlayerRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/players/{id}": {
+            "get": {
+                "description": "Return the player whose id value match id.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "player"
+                ],
+                "summary": "Get Single player by id.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "update player by id",
+                        "name": "player",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Update player data.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "player"
+                ],
+                "summary": "Update player",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "update player by id",
+                        "name": "playerId",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Update player",
+                        "name": "player",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/request.CreatePlayerRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "request.CreateLevelRequest": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
+                }
+            }
+        },
+        "request.CreatePlayerRequest": {
+            "type": "object",
+            "required": [
+                "level_id",
+                "name",
+                "player_id"
+            ],
+            "properties": {
+                "level_id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
+                },
+                "player_id": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
+                }
+            }
+        },
+        "response.Response": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {},
+                "status": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

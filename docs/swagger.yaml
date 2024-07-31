@@ -1,0 +1,160 @@
+basePath: /api
+definitions:
+  request.CreateLevelRequest:
+    properties:
+      name:
+        maxLength: 200
+        minLength: 1
+        type: string
+    required:
+    - name
+    type: object
+  request.CreatePlayerRequest:
+    properties:
+      level_id:
+        type: integer
+      name:
+        maxLength: 200
+        minLength: 1
+        type: string
+      player_id:
+        maxLength: 200
+        minLength: 1
+        type: string
+    required:
+    - level_id
+    - name
+    - player_id
+    type: object
+  response.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      status:
+        type: string
+    type: object
+host: localhost:8888
+info:
+  contact: {}
+  description: A demo service API in Go using Gin framework
+  title: Service API
+  version: "1.0"
+paths:
+  /levels:
+    get:
+      description: Return list of level.
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Get All level.
+      tags:
+      - level
+    post:
+      description: Save level data in Db.
+      parameters:
+      - description: Create level
+        in: body
+        name: level
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreateLevelRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Create level
+      tags:
+      - level
+  /player/{id}:
+    delete:
+      description: Remove player data by id.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Delete player
+      tags:
+      - player
+  /players:
+    get:
+      description: Return list of player.
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Get All players.
+      tags:
+      - player
+    post:
+      description: Save player data in Db.
+      parameters:
+      - description: Create player
+        in: body
+        name: player
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreatePlayerRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Create player
+      tags:
+      - player
+  /players/{id}:
+    get:
+      description: Return the player whose id value match id.
+      parameters:
+      - description: update player by id
+        in: path
+        name: player
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Get Single player by id.
+      tags:
+      - player
+    put:
+      description: Update player data.
+      parameters:
+      - description: update player by id
+        in: path
+        name: playerId
+        required: true
+        type: string
+      - description: Update player
+        in: body
+        name: player
+        required: true
+        schema:
+          $ref: '#/definitions/request.CreatePlayerRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Update player
+      tags:
+      - player
+swagger: "2.0"
