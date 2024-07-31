@@ -35,6 +35,7 @@
 在本地端可以用 docker-compose up -d 啟動服務
 啟動後在 http://localhost:8080/swagger/index.html 可以看到API文檔
 
+![image](https://raw.githubusercontent.com/PoloPing/interview_chenping_20240731/main/Screenshot%202024-07-31%20at%2016.03.06.png)
 
 
 
